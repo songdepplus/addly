@@ -13,8 +13,13 @@ export default function Login() {
     try {
       await signInWithEmailAndPassword(auth, email, password);
       window.location.href = '/';
-    } catch (err: any) {
-      setError(err.message);
+    } catch (err) {
+      let message = 'Unknown error';
+      if (err && typeof err === 'object' && 'message' in err) {
+        // @ts-ignore
+        message = err.message;
+      }
+      setError(message);
     }
   };
 

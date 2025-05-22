@@ -20,8 +20,13 @@ export default function Register() {
         createdAt: new Date()
       });
       window.location.href = '/';
-    } catch (err: any) {
-      setError(err.message);
+    } catch (err) {
+      let message = 'Unknown error';
+      if (err && typeof err === 'object' && 'message' in err) {
+        // @ts-ignore
+        message = err.message;
+      }
+      setError(message);
     }
   };
 
